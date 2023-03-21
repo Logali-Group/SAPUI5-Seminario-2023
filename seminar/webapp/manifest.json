@@ -1,0 +1,146 @@
+{
+  "_version": "1.49.0",
+  "sap.app": {
+    "id": "seminar",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.9.1",
+      "toolsId": "b06738b8-2e1b-406b-aab0-69cf29e90eda"
+    },
+    "dataSources": {
+      "ZEMPLOYEES_SRV": {
+        "uri": "/sap/opu/odata/sap/ZEMPLOYEES_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "handleValidation": true,
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.111.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "seminar.i18n.i18n"
+        }
+      },
+      "employees": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "dataSource": "ZEMPLOYEES_SRV",
+        "preload": true,
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Request",
+          "refreshAfterChange": true,
+          "useBatch": true
+        }
+      },
+      "employeeType":{
+        "type":"sap.ui.model.json.JSONModel",
+        "uri":"model/EmployeeType.json"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "seminar.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "launchpad",
+          "pattern": "",
+          "target": [
+            "launchpad"
+          ]
+        },
+        {
+          "name":"createEmployee",
+          "pattern":"createEmployee",
+          "target":"createEmployee"
+        }
+      ],
+      "targets": {
+        "main": {
+          "viewName": "App",
+          "controlId": "mainContainer",
+          "controlAggregation": "pages"
+        },
+        "launchpad": {
+          "parent": "main",
+          "viewName": "Launchpad",
+          "controlId": "mainContent",
+          "controlAggregation": "pages"
+        },
+        "createEmployee":{
+          "parent":"main",
+          "viewName":"Employees",
+          "controlId":"mainContent",
+          "controlAggregation": "pages"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "seminar.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

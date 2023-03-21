@@ -1,0 +1,31 @@
+<mvc:View controllerName="seminar.controller.App"
+        xmlns="sap.tnt"
+        xmlns:m="sap.m"
+        xmlns:f="sap.f"
+        xmlns:mvc="sap.ui.core.mvc" 
+        displayBlock="true">
+
+        <m:Shell>
+            <m:App id="mainContainer">
+                <m:pages>
+
+                    <ToolPage>
+                        <header>
+                            <f:ShellBar homeIcon="icons/logoH.svg"
+                                        title="{i18n>toolPageSecondTitle}"
+                                        showCopilot="true"
+                                        copilotPressed="onNavToLaunchpad">
+                            </f:ShellBar>
+                        </header>
+
+                        <mainContents>
+                                <m:App id="mainContent"/>
+                        </mainContents>
+
+                    </ToolPage>
+
+                </m:pages>
+            </m:App>
+        </m:Shell>
+
+</mvc:View>

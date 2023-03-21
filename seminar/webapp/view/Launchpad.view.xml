@@ -1,0 +1,33 @@
+<mvc:View
+        xmlns="sap.m"
+        xmlns:uxap="sap.uxap"
+        xmlns:sb="seminar.sharedblocks"
+        xmlns:mvc="sap.ui.core.mvc">
+
+    <uxap:ObjectPageLayout>
+
+        <uxap:sections>
+                <uxap:ObjectPageSection title="{i18n>LaunchpadModuleA}">
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection>
+                            <uxap:blocks>
+                                <sb:Employees/>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+
+                <uxap:ObjectPageSection title="{i18n>LaunchpadModuleB}">
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection>
+                            <uxap:blocks>
+                                <sb:Deploy/>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+        </uxap:sections>
+
+    </uxap:ObjectPageLayout>
+
+</mvc:View>

@@ -1,0 +1,130 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:c="sap.ui.core">
+
+    <Dialog
+            id="createEmployee"
+            title="{i18n>createEmployee}">
+
+        <content>   
+            <f:SimpleForm id="simpleForm"
+                            editable="true">
+                <f:content>
+                        <c:Title text="{i18n>employeeType}"/>
+                        <Label text="{i18n>type}" required="true" wrapping="true"/>
+                        <SegmentedButton items="{employeeType>/Type}"
+                                        class="sapUiSmallMarginBottom"
+                                        selectedKey="{view>/Type}">
+                            <items>
+                                <SegmentedButtonItem key="{employeeType>Key}" 
+                                            text="{employeeType>Text}"/>
+                            </items>
+                        </SegmentedButton>
+                        <c:Title text="{i18n>employeeData}"/>
+                        <Label text="{i18n>firstName}" 
+                                required="true" 
+                                wrapping="true"/>
+                        <Input 
+                                value="{
+                                    path:'view>/FirstName',
+                                    type:'sap.ui.model.type.String',
+                                    constraints:{
+                                        minLength:3,
+                                        maxLength:40
+                                    }
+                                }"
+                                valueLiveUpdate="true"/>
+                        <Label text="{i18n>lastName}" 
+                                required="true" 
+                                wrapping="true"/>
+                        <Input 
+                                value="{
+                                    path:'view>/LastName',
+                                    type:'sap.ui.model.type.String',
+                                    constraints:{
+                                        minLength:3,
+                                        maxLength:40
+                                    }
+                                }"
+                                valueLiveUpdate="true"/>
+                        <Label text="{= ${view>/Type} === '1'? ${i18n>cif} : ${i18n>dni}}"
+                                required="true"
+                                wrapping="true"/>
+                        <Input 
+                                value="{
+                                    path:'view>/Dni',
+                                    type:'sap.ui.model.type.String',
+                                    constraints:{
+                                        minLength:6,
+                                        maxLength:20
+                                    }
+                                }"
+                                valueLiveUpdate="true"/>
+                        <Label text="{i18n>grossSalary}" 
+                                visible="{= ${view>/Type} !== '1'? true: false}"
+                                wrapping="true"/>
+                        <Slider id="grossSalary"
+                            class="sapUiLargeMarginBottom"
+                            enableTickmarks="true"
+                            showAdvancedTooltip="true"
+                            min="{= ${view>/Type} === '0'? ${view>/InternalMin} : 
+                                    ${view>/Type} === '2'? ${view>/ManagerMin} : ${view>/AutonomusMin} 
+                            }"
+                            max="{= ${view>/Type} === '0'? ${view>/InternalMax} : 
+                                    ${view>/Type} === '2'? ${view>/ManagerMax} : ${view>/AutonomusMax} 
+                            }"
+                            value="{=   ${view>/Type} === '0'? ${view>/InternalDefault} : 
+                                        ${view>/Type} === '2'? ${view>/ManagerDefault} : ${view>/AutonomusDefault} 
+                            }"
+                            visible="{= ${view>/Type} !== '1'? true: false}"/>
+                        <Label text="{i18n>dailyPrice}" 
+                                visible="{= ${view>/Type} === '1'? true: false}"
+                                wrapping="true"/>
+                        <Slider id="dailyPrice"
+                            class="sapUiLargeMarginBottom"
+                            enableTickmarks="true"
+                            showAdvancedTooltip="true"
+                            min="{= ${view>/Type} === '1'? ${view>/AutonomusMin} : 0 }"
+                            max="{= ${view>/Type} === '1'? ${view>/AutonomusMax} : 0 }"
+                            value="{= ${view>/Type} === '1'? ${view>/AutonomusDefault} : 0 }"
+                            visible="{= ${view>/Type} === '1'? true : false}"/>
+                        <Label text="{i18n>date}" 
+                                    required="true" 
+                                    wrapping="true"/>
+                        <DatePicker 
+                                value="{
+                                    path:'view>/Date',
+                                    type:'sap.ui.model.type.DateTime',
+                                    formatOptions:{
+                                        UTC: true,
+                                        pattern:'MM/dd/yyyy'
+                                    },
+                                    constraints:{
+                                        nullable: false
+                                    }
+                                }"
+                                valueFormat="MM/dd/yyyy"/>
+
+                        <c:Title text="{i18n>additionalInformation}"/>
+                        <Label text="{i18n>comment}" wrapping="true"/>
+                        <TextArea value="{view>/Comments}"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button text="{i18n>save}"
+                    tooltip="{i18n>save}"
+                    press="onSave"/>
+        </beginButton>
+
+        <endButton>
+            <Button text="{i18n>closeDialog}"
+                    tooltip="{i18n>closeDialog}"
+                    press="onCloseDialog"/>
+        </endButton>
+
+    </Dialog>
+
+</c:FragmentDefinition>
